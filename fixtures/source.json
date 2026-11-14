@@ -1,0 +1,288 @@
+{
+  "exchanges": [
+    {
+      "path": "/streams/air",
+      "method": "GET",
+      "body": {
+        "id": "air",
+        "definition": "d1",
+        "components": [
+          {
+            "id": "temperature",
+            "unit": "Cel"
+          },
+          {
+            "id": "pm",
+            "unit": "ug/m3"
+          }
+        ]
+      },
+      "requires": {},
+      "sets": {},
+      "status": 200,
+      "query": {}
+    },
+    {
+      "path": "/observations",
+      "method": "GET",
+      "body": {
+        "items": [
+          {
+            "observationId": "o1",
+            "definition": "d1",
+            "phenomenonTime": 10,
+            "result": [
+              21,
+              8
+            ],
+            "locationRef": "stop1"
+          }
+        ],
+        "next": null
+      },
+      "requires": {},
+      "sets": {},
+      "status": 200,
+      "query": {
+        "stream": "air",
+        "page": "1"
+      }
+    },
+    {
+      "path": "/definitions/d1",
+      "method": "GET",
+      "body": {
+        "components": [
+          {
+            "id": "temperature",
+            "unit": "Cel"
+          },
+          {
+            "id": "pm",
+            "unit": "ug/m3"
+          }
+        ]
+      },
+      "requires": {},
+      "sets": {},
+      "status": 200,
+      "query": {}
+    },
+    {
+      "path": "/locations/stop1",
+      "method": "GET",
+      "body": {
+        "point": [
+          112.9,
+          28.2
+        ],
+        "validAt": 10
+      },
+      "requires": {},
+      "sets": {},
+      "status": 200,
+      "query": {}
+    }
+  ],
+  "cases": {
+    "probe-change": [
+      {
+        "path": "/streams/air",
+        "method": "GET",
+        "body": {
+          "id": "air",
+          "definition": "d2",
+          "components": [
+            {
+              "id": "pm",
+              "unit": "ug/m3"
+            },
+            {
+              "id": "temperature",
+              "unit": "Cel"
+            }
+          ]
+        },
+        "requires": {},
+        "sets": {},
+        "status": 200,
+        "query": {}
+      },
+      {
+        "path": "/definitions/d2",
+        "method": "GET",
+        "body": {
+          "components": [
+            {
+              "id": "pm",
+              "unit": "ug/m3"
+            },
+            {
+              "id": "temperature",
+              "unit": "Cel"
+            }
+          ]
+        },
+        "requires": {},
+        "sets": {},
+        "status": 200,
+        "query": {}
+      },
+      {
+        "path": "/observations",
+        "method": "GET",
+        "body": {
+          "items": [
+            {
+              "observationId": "o2",
+              "definition": "d1",
+              "phenomenonTime": 11,
+              "result": [
+                null,
+                7
+              ],
+              "locationRef": "stop2"
+            },
+            {
+              "observationId": "o3",
+              "definition": "d2",
+              "phenomenonTime": 12,
+              "result": [
+                6
+              ],
+              "locationRef": "stop1"
+            }
+          ],
+          "next": null
+        },
+        "requires": {},
+        "sets": {},
+        "status": 200,
+        "query": {
+          "stream": "air",
+          "page": "1"
+        }
+      },
+      {
+        "path": "/locations/stop2",
+        "method": "GET",
+        "body": {
+          "point": [
+            113,
+            28.2
+          ],
+          "validAt": 11
+        },
+        "requires": {},
+        "sets": {},
+        "status": 200,
+        "query": {}
+      }
+    ],
+    "location-pending": [
+      {
+        "path": "/streams/air",
+        "method": "GET",
+        "body": {
+          "id": "air",
+          "definition": "d2",
+          "components": [
+            {
+              "id": "pm",
+              "unit": "ug/m3"
+            },
+            {
+              "id": "temperature",
+              "unit": "Cel"
+            }
+          ]
+        },
+        "requires": {},
+        "sets": {},
+        "status": 200,
+        "query": {}
+      },
+      {
+        "path": "/definitions/d2",
+        "method": "GET",
+        "body": {
+          "components": [
+            {
+              "id": "pm",
+              "unit": "ug/m3"
+            },
+            {
+              "id": "temperature",
+              "unit": "Cel"
+            }
+          ]
+        },
+        "requires": {},
+        "sets": {},
+        "status": 200,
+        "query": {}
+      },
+      {
+        "path": "/observations",
+        "method": "GET",
+        "body": {
+          "items": [
+            {
+              "observationId": "o2",
+              "definition": "d1",
+              "phenomenonTime": 11,
+              "result": [
+                null,
+                7
+              ],
+              "locationRef": "stop2"
+            },
+            {
+              "observationId": "o3",
+              "definition": "d2",
+              "phenomenonTime": 12,
+              "result": [
+                6
+              ],
+              "locationRef": "stop1"
+            }
+          ],
+          "next": null
+        },
+        "requires": {},
+        "sets": {},
+        "status": 200,
+        "query": {
+          "stream": "air",
+          "page": "1"
+        }
+      },
+      {
+        "path": "/locations/stop2",
+        "method": "GET",
+        "body": {
+          "error": "location not published"
+        },
+        "requires": {},
+        "sets": {},
+        "status": 404,
+        "query": {}
+      },
+      {
+        "path": "/locations/stop2",
+        "method": "GET",
+        "body": {
+          "point": [
+            113,
+            28.2
+          ],
+          "validAt": 11
+        },
+        "requires": {},
+        "sets": {},
+        "status": 200,
+        "query": {}
+      }
+    ]
+  }
+}
